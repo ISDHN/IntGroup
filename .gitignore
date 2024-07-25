@@ -1,0 +1,17 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore npm debug log
+npm-debug.log
+
+# Ignore yarn.lock file (if using Yarn)
+yarn.lock
+
+# Ignore .env file (if containing sensitive information)
+.env
+
+data/
+
+dist/
+
+logs/
