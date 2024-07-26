@@ -1,0 +1,42 @@
+name: 
+  InterestGroup CI
+on: 
+  push
+jobs:
+  Frontend Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [21.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Use frontend
+        run: cd backend
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm run test
+
+  Backend Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [21.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Use backend
+        run: cd backend
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm run test

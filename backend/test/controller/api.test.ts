@@ -1,5 +1,6 @@
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Framework, Application } from '@midwayjs/koa';
+import 'jest';
 
 describe('test/controller/home.test.ts', () => {
 
