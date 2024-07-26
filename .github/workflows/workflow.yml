@@ -10,13 +10,13 @@ jobs:
         node-version: [21.x]
     steps:
       - uses: actions/checkout@v4
+      - name: Use frontend
+        run: cd backend
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: Use frontend
-        run: cd backend
+          cache: 'npm'      
       - name: Install Dependencies
         run: npm ci
       - name: Run Tests
@@ -29,13 +29,13 @@ jobs:
         node-version: [21.x]
     steps:
       - uses: actions/checkout@v4
+      - name: Use backend
+        run: cd backend
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Use backend
-        run: cd backend
       - name: Install Dependencies
         run: npm ci
       - name: Run Tests
