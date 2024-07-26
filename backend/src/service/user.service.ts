@@ -22,6 +22,10 @@ export class UserService {
         this.userInfos = userdatas.inf;
     }
 
+    private async save() {
+        //fs.writeFile('./data/users.json', JSON.stringify({ pw: this.usersPassword, inf: this.userInfos }), () => { })
+    }
+
     async login(info: ILoginInfo): Promise<number> {
         if (this.usersPassword[info.username] && this.usersPassword[info.username].password === info.password) {
             return this.usersPassword[info.username].id;
@@ -45,6 +49,7 @@ export class UserService {
             ints: [],
             likes: []
         }
+        this.save()
         return true
     }
 
@@ -75,6 +80,7 @@ export class UserService {
         const savePlace = `data/imgs/${this.userInfos[uid].basic.username}_avatar`
         fs.copyFileSync(avatar, savePlace)
         this.userInfos[uid].basic.avatar = `http://localhost:7001/${savePlace}?tempid=${Math.random()}`
+        this.save()
         return `${this.userInfos[uid].basic.avatar}`
     }
 
@@ -94,6 +100,7 @@ export class UserService {
         }
         this.userInfos[uid].ints.push(intid)
         this.intservice.addPoint(intid)
+        this.save()
     }
 
     async removeInterest(uid: number, intid: number) {
@@ -104,6 +111,7 @@ export class UserService {
             return
         }
         this.userInfos[uid].ints = this.userInfos[uid].ints.filter((id) => id !== intid)
+        this.save()
     }
 
     async haslikedPost(uid: number, pid: number) {
@@ -125,6 +133,7 @@ export class UserService {
         }
         this.postservice.unlikePost(pid)
         this.userInfos[uid].likes = this.userInfos[uid].likes.filter((id) => id !== pid)
+        this.save()
     }
 
     async likePost(uid: number, pid: number) {
@@ -136,6 +145,7 @@ export class UserService {
         }
         this.userInfos[uid].likes.push(pid)
         this.postservice.likePost(pid)
+        this.save()
     }
 
     async getLikes(uid: number, start: number, end: number) {

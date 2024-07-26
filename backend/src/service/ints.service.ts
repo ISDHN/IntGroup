@@ -11,6 +11,11 @@ export class IntsService {
         this.ints = JSON.parse(fs.readFileSync('./data/interests.json').toString())
         this.ids = Array.from(this.ints.keys())
     }
+
+    private async save() {
+        //fs.writeFileSync('./data/interests.json', JSON.stringify(this.ints))
+    }
+
     async getInfo(iid: number) {
         return this.ints[iid]
     }
@@ -33,7 +38,7 @@ export class IntsService {
         fs.copyFileSync(icon, savePlace)
         this.ints.push({ icon: `http://localhost:7001/${savePlace}`, name: name, people: 1, points: 1 })
         this.ids.push(this.ints.length - 1)
-        //fs.writeFileSync('./data/interests.json', JSON.stringify(this.ints))
+        this.save()
         return this.ints.length - 1
     }
 
@@ -42,6 +47,6 @@ export class IntsService {
             this.ints[iid].points = 0
         }
         this.ints[iid].points += 1
-        //fs.writeFileSync('./data/interests.json', JSON.stringify(this.ints))
+        this.save()
     }
 }

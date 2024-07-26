@@ -20,6 +20,13 @@ export class PostService {
         this.comments = JSON.parse(fs.readFileSync('./data/comments.json').toString())
     }
 
+    private async savePosts() {
+        //fs.writeFile('./data/posts.json', JSON.stringify(this.posts), () => { })
+    }
+    private async saveComments() {
+        //fs.writeFile('./data/comments.json', JSON.stringify(this.comments), () => { })
+    }
+
     async getPostsOfAll(start: number, end: number) {
         if (start >= this.posts.length) {
             return []
@@ -75,7 +82,7 @@ export class PostService {
         })
         this.ids.unshift(this.posts.push(post) - 1)
         this.intservice.addPoint(iid)
-        //fs.writeFileSync('./data/posts.json', JSON.stringify(this.posts))
+        this.savePosts()
     }
 
     async commentPost(uid: number, pid: number, content: string) {
@@ -87,7 +94,8 @@ export class PostService {
         }
         this.posts[pid].comments.push(this.comments.push(comment) - 1)
         this.intservice.addPoint(this.posts[pid].iid)
-        //fs.writeFileSync('./data/comments.json', JSON.stringify(this.posts))
+        this.saveComments()
+        this.savePosts()
     }
 
     async getComments(pid: number, start: number, end: number) {
@@ -107,13 +115,13 @@ export class PostService {
     async likePost(pid: number) {
         this.posts[pid].likes += 1
         this.intservice.addPoint(this.posts[pid].iid)
-        //fs.writeFileSync('./data/posts.json', JSON.stringify(this.posts))
+        this.savePosts()
     }
 
     async unlikePost(pid: number) {
         this.posts[pid].likes -= 1
         this.intservice.addPoint(this.posts[pid].iid)
-        //fs.writeFileSync('./data/posts.json', JSON.stringify(this.posts))
+        this.savePosts()
     }
 
     async getLikes(pid: number) {

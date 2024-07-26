@@ -1,20 +1,32 @@
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
-import { Framework } from '@midwayjs/koa';
+import { Framework, Application } from '@midwayjs/koa';
 
 describe('test/controller/home.test.ts', () => {
 
-  it('should POST /api/get_user', async () => {
-    // create app
-    const app = await createApp<Framework>();
+  let app: Application;
 
-    // make request
-    const result = await createHttpRequest(app).get('/api/get_user').query({ uid: 123 });
+  beforeAll(async () => {
+    // 只创建一次 app，可以复用
+    app = await createApp<Framework>();
+  });
 
-    // use expect by jest
-    expect(result.status).toBe(200);
-    expect(result.body.message).toBe('OK');
-
+  afterAll(async () => {
     // close app
     await close(app);
+  });
+
+  it('should POST /api/user/info', async () => {
+    const result = await createHttpRequest(app).post('/api/user/info/0')
+
+    expect(result.status).toBe(200);
+    expect(result.body.username).toBe("Ivy");
+    expect(result.body.avatar).toBe("https://img.moegirl.org.cn/common/thumb/7/73/D_Ivy.png/450px-D_Ivy.png");
+  });
+
+  it('should POST /api/user/ints', async () => {
+    const result = await createHttpRequest(app).post('/api/user/ints/0')
+
+    expect(result.status).toBe(200);
+    expect(result.body).toStrictEqual([0, 2, 5, 6, 7])
   });
 });
