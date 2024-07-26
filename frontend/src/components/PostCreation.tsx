@@ -1,5 +1,6 @@
 import * as axios from "axios";
 import { useState } from "react";
+import { UniqueConcat } from "../helper";
 
 export function PostCreation(props: { hideCallBack: () => void, url: string, canUploadImage: boolean }) {
     const [images, setImages] = useState<File[]>([]);
@@ -15,7 +16,7 @@ export function PostCreation(props: { hideCallBack: () => void, url: string, can
                     </label>
                     <input id="uploadPostImage" className="hidden" multiple type="file" accept="image/apng,image/gif,image/png, image/jpeg, image/svg+xml,image/webp" onChange={(event) => {
                         if (event.target.files) {
-                            setImages(images.concat(Array.from(event.target.files)));
+                            setImages(UniqueConcat(images, Array.from(event.target.files)));
                         }
                     }} />
                 </> : <></>}

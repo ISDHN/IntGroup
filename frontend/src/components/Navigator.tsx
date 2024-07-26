@@ -1,5 +1,4 @@
-export function Navigator(props: { namesAndCallback: { name: string, callback: () => void }[] }
-) {
+export function Navigator(props: { namesAndCallback: { name: string, callback: () => void }[] }) {
 
     return (
         <div className="relative my-2" >
