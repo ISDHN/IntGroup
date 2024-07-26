@@ -3,7 +3,7 @@ name:
 on: 
   push
 jobs:
-  Frontend Test:
+  frontend-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,7 +22,7 @@ jobs:
       - name: Run Tests
         run: npm run test
 
-  Backend Test:
+  backend-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
