@@ -21,10 +21,10 @@ export class PostService {
     }
 
     private async savePosts() {
-        //fs.writeFile('./data/posts.json', JSON.stringify(this.posts), () => { })
+        fs.writeFile('./data/posts.json', JSON.stringify(this.posts), () => { })
     }
     private async saveComments() {
-        //fs.writeFile('./data/comments.json', JSON.stringify(this.comments), () => { })
+        fs.writeFile('./data/comments.json', JSON.stringify(this.comments), () => { })
     }
 
     async getPostsOfAll(start: number, end: number) {
@@ -70,6 +70,7 @@ export class PostService {
             iid: iid,
             content: content,
             comments: [],
+            quote: -1,
             imgs: [],
             likes: 0,
             date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
@@ -95,6 +96,23 @@ export class PostService {
         this.posts[pid].comments.push(this.comments.push(comment) - 1)
         this.intservice.addPoint(this.posts[pid].iid)
         this.saveComments()
+        this.savePosts()
+    }
+
+    async forwardPost(uid: number, pid: number, content: string) {
+        const now = new Date()
+        const post: IPost = {
+            uid: uid,
+            iid: this.posts[pid].iid,
+            content: content,
+            comments: [],
+            quote: pid,
+            imgs: this.posts[pid].imgs,
+            likes: 0,
+            date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+        }
+        this.ids.unshift(this.posts.push(post) - 1)
+        this.intservice.addPoint(this.posts[pid].iid)
         this.savePosts()
     }
 

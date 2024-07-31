@@ -28,7 +28,7 @@ export function CardsContainer(props: { type: string, domain: string, datakind: 
                         infos.map((info) => {
                             switch (props.type) {
                                 case 'post':
-                                    return <PostCard key={-info} id={info} />
+                                    return <PostCard key={-info} id={info} quote={false} />
                                 case 'ints':
                                     return <InterestCard key={info} id={info} />
                                 case 'comment':

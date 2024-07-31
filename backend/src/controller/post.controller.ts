@@ -35,6 +35,11 @@ export class PostController {
         return this.postService.commentPost(uid, pid, fields.content)
     }
 
+    @Post("/forward")
+    async forwardPost(@Fields() fields, @Query('uid') uid: number, @Query('pid') pid: number) {
+        return this.postService.forwardPost(uid, pid, fields.content)
+    }
+
     @Post("/comments/:pid")
     async getComments(@Param('pid') pid: number, @Query('start') start: number, @Query('end') end: number) {
         return this.postService.getComments(pid, start, end)

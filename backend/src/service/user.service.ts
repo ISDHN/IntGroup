@@ -23,7 +23,7 @@ export class UserService {
     }
 
     private async save() {
-        //fs.writeFile('./data/users.json', JSON.stringify({ pw: this.usersPassword, inf: this.userInfos }), () => { })
+        fs.writeFile('./data/users.json', JSON.stringify({ pw: this.usersPassword, inf: this.userInfos }), () => { })
     }
 
     async login(info: ILoginInfo): Promise<number> {

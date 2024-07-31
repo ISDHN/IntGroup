@@ -22,6 +22,7 @@ export interface IPost {
   uid: number;
   iid: number;
   content: string;
+  quote: number;
   imgs: string[];
   date: string;
   likes: number;

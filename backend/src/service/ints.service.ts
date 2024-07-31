@@ -13,7 +13,7 @@ export class IntsService {
     }
 
     private async save() {
-        //fs.writeFileSync('./data/interests.json', JSON.stringify(this.ints))
+        fs.writeFileSync('./data/interests.json', JSON.stringify(this.ints))
     }
 
     async getInfo(iid: number) {

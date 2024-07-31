@@ -1,7 +1,6 @@
 import { Configuration, App } from '@midwayjs/core';
 import * as crossDomain from '@midwayjs/cross-domain';
 import * as koa from '@midwayjs/koa';
-import * as validate from '@midwayjs/validate';
 import * as info from '@midwayjs/info';
 import * as upload from '@midwayjs/upload';
 import { join } from 'path';
@@ -13,7 +12,6 @@ import { ReportMiddleware } from './middleware/report.middleware';
   imports: [
     koa,
     crossDomain,
-    validate,
     upload,
     {
       component: info,
