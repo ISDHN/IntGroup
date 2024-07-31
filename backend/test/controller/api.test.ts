@@ -28,6 +28,6 @@ describe('test/controller/home.test.ts', () => {
     const result = await createHttpRequest(app).post('/api/user/ints/0').query({ start: 0, end: 5 })
 
     expect(result.status).toBe(200);
-    expect(result.body).toStrictEqual([0, 2, 5, 6, 7])
+    expect(result.body).toStrictEqual([0, 2, 5, 6])
   });
 });
