@@ -3,7 +3,7 @@ import './output.css'
 import { PublicSquarePage } from './pages/PublicSquarePage.tsx'
 import { InterestsPage } from './pages/InterestsPage.tsx'
 import { UserPage } from './pages/UserPage.tsx'
-import { getCurrentUser, getCurrentUserInfo, setCurrentUserInfo } from "./CurrentUser.tsx";
+import { getCurrentUser, getCurrentUserInfo, setCurrentUserInfo } from "./CurrentUser";
 import defaultAvatar from "./assets/User.svg"
 import * as axios from "axios";
 import { PageType } from './enum.ts'
