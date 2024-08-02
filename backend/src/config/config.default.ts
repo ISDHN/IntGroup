@@ -9,6 +9,7 @@ export default {
   koa: {
     port: 7001,
   },
+  webSocket: {},
   upload: {
     fileSize: '1gb'
   },

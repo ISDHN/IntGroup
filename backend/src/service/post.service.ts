@@ -1,7 +1,8 @@
 import { IComment, IPost } from './../interface';
-import { Inject, Provide, Scope, ScopeEnum } from '@midwayjs/core';
+import { App, Inject, Provide, Scope, ScopeEnum } from '@midwayjs/core';
 import * as fs from 'fs'
 import { IntsService } from './ints.service';
+import { Application } from '@midwayjs/ws';
 
 @Provide()
 @Scope(ScopeEnum.Singleton)
@@ -10,6 +11,9 @@ export class PostService {
     posts: IPost[] = [];
     ids: number[] = [];
     comments: IComment[] = [];
+
+    @App('webSocket')
+    wsApp: Application;
 
     @Inject()
     intservice: IntsService
@@ -82,7 +86,11 @@ export class PostService {
             post.imgs.push(`http://localhost:7001/${savePlace}`)
         })
         this.ids.unshift(this.posts.push(post) - 1)
+        this.wsApp.clients.forEach((client) => {
+            client.send('NEWPOST')
+        })
         this.intservice.addPoint(iid)
+
         this.savePosts()
     }
 
@@ -112,6 +120,9 @@ export class PostService {
             date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
         }
         this.ids.unshift(this.posts.push(post) - 1)
+        this.wsApp.clients.forEach((client) => {
+            client.send('NEWPOST')
+        })
         this.intservice.addPoint(this.posts[pid].iid)
         this.savePosts()
     }

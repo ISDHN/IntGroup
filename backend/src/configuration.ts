@@ -1,6 +1,7 @@
 import { Configuration, App } from '@midwayjs/core';
 import * as crossDomain from '@midwayjs/cross-domain';
 import * as koa from '@midwayjs/koa';
+import * as ws from '@midwayjs/ws';
 import * as info from '@midwayjs/info';
 import * as upload from '@midwayjs/upload';
 import { join } from 'path';
@@ -13,6 +14,7 @@ import { ReportMiddleware } from './middleware/report.middleware';
     koa,
     crossDomain,
     upload,
+    ws,
     {
       component: info,
       enabledEnvironment: ['local'],
