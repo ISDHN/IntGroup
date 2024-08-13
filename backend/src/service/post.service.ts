@@ -115,7 +115,7 @@ export class PostService {
             content: content,
             comments: [],
             quote: pid,
-            imgs: this.posts[pid].imgs,
+            imgs: [],
             likes: 0,
             date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
         }

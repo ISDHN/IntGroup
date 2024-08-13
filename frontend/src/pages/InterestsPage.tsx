@@ -5,6 +5,7 @@ import { useState } from "react";
 import { IntType } from "../enum";
 import { setMessageBox } from "../App";
 import { InterestCreation } from "../components/InterestCreation";
+import { UpdateButton } from "../components/UpdateButton";
 
 export function InterestsPage() {
     const [intType, setIntType] = useState<IntType>(IntType.My)
@@ -40,6 +41,7 @@ export function InterestsPage() {
             <button className="absolute bottom-5 left-5 m-4 px-4 py-1.5 font-mono text-white bg-indigo-600 hover:bg-indigo-900 text-4xl rounded-full" onClick={() => {
                 setMessageBox(<InterestCreation />, true)
             }}>+</button>
+            <UpdateButton msg='NEWINT' />
         </>
     )
 }
